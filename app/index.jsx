@@ -2,11 +2,16 @@ import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native'
 import log from "../assets/images/Logos.png"
 import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useEffect } from 'react'
-import { Link } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { IsLogin } from '../functions/auth'
 
 
 const index = () => {
+    const router = useRouter()
+    useEffect(() => {
+        IsLogin(router)
+    }, [])
   return (
     <SafeAreaView className="bg-background h-[100vh] flex pt-[20px] text-white items-center">
         <View className="flex justify-center items-center mt-[100px]">
@@ -34,7 +39,7 @@ const index = () => {
                 <Link className="text-white text-center w-[100%] h-[100%]" href="/signin" >Lets Start</Link>
             </TouchableOpacity>
         </View>
-        <StatusBar backgroundColor='#754683' style='light'/>
+        <StatusBar backgroundColor='#3D0031' style='light'/>
     </SafeAreaView>
   )
 }

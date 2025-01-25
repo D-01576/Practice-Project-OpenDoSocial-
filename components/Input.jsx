@@ -14,13 +14,14 @@ const Input = ({name, security, value, onChangeIn}) => {
   },[])
 
   return (
-    <View>
-      <Text>{name}</Text>
-      <View className="w-full h-16 px-4 bg-violet-900 rounded-[5px] items-center justify-center flex-row pr-[20px]">
-        <TextInput className='text-white text-base w-full relative h-full' placeholder={name} placeholderTextColor={"gray"} secureTextEntry={sec} value={value} onChange={onChangeIn}></TextInput>
+    <View className='mt-[20px]'>
+      <Text className='text-white'>{name}</Text>
+      <View className="w-full h-16 px-4 bg-input rounded-[5px] items-center justify-center flex-row pr-[20px]">
+        <TextInput className='text-white text-base w-full relative z-10' placeholder="Enter here..." placeholderTextColor={"gray"} secureTextEntry={sec} value={value} onChange={onChangeIn}></TextInput>
         {security && (
-            <TouchableOpacity onPress={()=> setsec(!sec)} className='items-end w-full absolute'>
-                <View className='z-30 bg-blue-50'>
+          <View className='items-end absolute w-full'>
+            <TouchableOpacity onPress={()=> setsec(!sec)} className='z-30'>
+                <View className='z-30'>
                     <Icon 
                         name={sec ? 'eye-off' : 'eye'}
                         size={24}
@@ -31,6 +32,7 @@ const Input = ({name, security, value, onChangeIn}) => {
                     ></Icon>
                 </View>
             </TouchableOpacity>
+          </View>
         )}
       </View>
     </View>

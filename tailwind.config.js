@@ -7,7 +7,9 @@ module.exports = {
     extend: {
       backgroundColor : {
         'primary' : '#3498db',
-        'background': '#754683'
+        'background': '#3D0031',
+        'input' : "rgba(255, 255, 255, 0.126)",
+        'buttonsign' : "rgba(135, 0, 117, 0.687)"
       }
     },
   },

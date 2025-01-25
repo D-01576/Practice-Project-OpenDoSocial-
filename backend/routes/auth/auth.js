@@ -9,7 +9,6 @@ const secret = process.env.SECRET_PASS;
 
 Auth.post("/signin", async(req,res)=>{
     const {email, password} = req.body;
-    console.log(email)
 
     try{
         const userverify = zod.object({
@@ -48,17 +47,22 @@ Auth.post("/signin", async(req,res)=>{
             token : token
         })
     }catch(error){
+        if(error.issues[0]){
+            res.json({
+                status : "failed",
+                message : error.issues[0].message
+            })
+            return
+        }
         res.json({
             status : "failed",
             message : "something went wrong"
         })
-        console.log(error)
     }
 })
 
 Auth.post("/signup", async(req,res)=>{
     const {email, password} = req.body;
-    console.log(email)
 
     try{
         const userverify = zod.object({
@@ -95,11 +99,50 @@ Auth.post("/signup", async(req,res)=>{
             token : token
         })
     }catch(error){
+        if(error.issues[0]){
+            res.json({
+                status : "failed",
+                message : error.issues[0].message
+            })
+            return
+        }
         res.json({
             status : "failed",
             message : "something went wrong"
         })
     }
+})
+
+Auth.get("/verify", async(req,res)=>{
+    const token = req.headers.token;
+    if(!token){
+        res.json({
+            status : "failed",
+            message : "No token provided"
+        })
+        return
+    }
+    jwt.verify(token, secret, async (err, decoded)=>{
+        if(err){
+            res.json({
+                status : "failed",
+                message : "Invalid token"
+            })
+            return
+        }
+        const user = await UserModel.findOne({email : decoded.email});
+        if(user.password != decoded.password){
+            res.json({
+                status : "failed",
+                message : "Invalid token"
+            })
+            return
+        }
+        res.json({
+            status : "success",
+            message : "Token verified"
+        })
+    })
 })
 
 module.exports = {

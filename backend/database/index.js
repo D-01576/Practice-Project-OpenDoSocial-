@@ -6,10 +6,13 @@ dotenv.config();
 mongoose.connect(process.env.MONGO_ID);
 
 const PostSchema = new mongoose.Schema({
-    from : {type: String, required:  true},
     fromEmail : {type : String, required : true},
+    title : {type : String, required : true},
     text : {type : String, required : true},
     likes : {type  :Number, default : 0},
+    Likesfrom : {type : [{
+        email : String
+    }], default : []},
     comments : {type : [{
         from: String,
         from: String

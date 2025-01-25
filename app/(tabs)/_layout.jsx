@@ -4,6 +4,7 @@ import { Tabs } from 'expo-router';
 import home from "../../assets/images/home.png";
 import profile from "../../assets/images/profile.png"
 import upload from "../../assets/images/upload.png"
+import { RecoilRoot } from 'recoil';
 
 const TabIcon = ({ name, color, focused, icon }) => {
   return (
@@ -18,6 +19,8 @@ const TabIcon = ({ name, color, focused, icon }) => {
 
 const Tabs_layout = () => {
   return (
+    
+    <RecoilRoot>
     <Tabs
     options= {{
       headerShown: false
@@ -28,7 +31,7 @@ const Tabs_layout = () => {
       tabBarActiveTintColor : "#ff8e00",
       tabBarInactiveTintColor : "gray",
       tabBarStyle : {
-        backgroundColor : "#754683",
+        backgroundColor : "#3D0031",
         height: 60,
         display : "flex",
         justifyContent : "center",
@@ -68,6 +71,7 @@ const Tabs_layout = () => {
         }}
       />
     </Tabs>
+    </RecoilRoot>
   );
 };
 
